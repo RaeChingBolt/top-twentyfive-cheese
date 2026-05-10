@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Top 25 Cheeses</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --bg: #fff8eb;
+      --card: #ffe8a3;
+      --card-dark: #ffd56b;
+      --accent: #c57d00;
+      --text: #34240f;
+      --border: rgba(80, 55, 0, 0.08);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      background: linear-gradient(to bottom, #fffaf0, #fff2d0);
+      color: var(--text);
+      font-family: Inter, sans-serif;
+      overflow-x: hidden;
+    }
+
+    header {
+      padding: 5rem 2rem 3rem;
+      text-align: center;
+    }
+
+    header h1 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(4rem, 9vw, 7rem);
+      font-weight: 700;
+      letter-spacing: -2px;
+      color: var(--accent);
+      line-height: 0.95;
+    }
+
+    header p {
+      margin-top: 1.2rem;
+      font-size: 1.1rem;
+      opacity: 0.75;
+    }
+
+    .container {
+      width: min(1400px, 94%);
+      margin: auto;
+      padding-bottom: 5rem;
+    }
+
+    .cheese-list {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    .cheese-card {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: linear-gradient(135deg, var(--card), var(--card-dark));
+      border-radius: 24px;
+      padding: 1.5rem 2rem;
+      border: 1px solid var(--border);
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .cheese-card::before {
+      content: '';
+      position: absolute;
+      width: 200px;
+      height: 200px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.15);
+      top: -120px;
+      right: -80px;
+    }
+
+    .cheese-card:hover {
+      transform: translateY(-4px) scale(1.005);
+      box-shadow: 0 16px 30px rgba(0,0,0,0.08);
+    }
+
+    .left {
+      display: flex;
+      align-items: center;
+      gap: 1.5rem;
+      z-index: 1;
+    }
+
+    .rank {
+      min-width: 70px;
+      height: 70px;
+      border-radius: 20px;
+      background: rgba(255,255,255,0.35);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.7rem;
+      font-weight: 700;
+      color: var(--accent);
+      font-family: 'Cormorant Garamond', serif;
+      backdrop-filter: blur(6px);
+    }
+
+    .info h2 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 2.2rem;
+      font-weight: 600;
+      margin-bottom: 0.2rem;
+    }
+
+    .info p {
+      opacity: 0.8;
+      max-width: 700px;
+      line-height: 1.6;
+    }
+
+    .origin {
+      background: rgba(255,255,255,0.45);
+      padding: 0.7rem 1rem;
+      border-radius: 999px;
+      font-weight: 600;
+      z-index: 1;
+      white-space: nowrap;
+    }
+
+    footer {
+      text-align: center;
+      padding: 3rem 1rem 4rem;
+      opacity: 0.6;
+      font-size: 0.95rem;
+    }
+
+    @media (max-width: 850px) {
+      .cheese-card {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 1rem;
+      }
+
+      .left {
+        align-items: flex-start;
+      }
+
+      .info h2 {
+        font-size: 1.8rem;
+      }
+
+      .origin {
+        margin-left: 5.4rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Top 25 Cheeses</h1>
+    <p>A refined collection of the world's most beloved cheeses.</p>
+  </header>
+
+  <main class="container">
+    <section class="cheese-list" id="cheeseList"></section>
+  </main>
+
+  <footer>
+    A tribute to culinary craftsmanship and dairy perfection.
+  </footer>
+
+  <script>
+    const cheeses = [
+      ['Parmigiano Reggiano', 'Italy', 'Often called the king of cheeses, Parmigiano Reggiano is aged for years to develop deep nutty flavors, crunchy crystals, and a rich umami finish that makes it perfect for pasta, soups, and risotto.'],
+      ['Brie', 'France', 'Brie is a luxurious soft cheese with a bloomy rind and buttery interior that becomes increasingly creamy as it ripens, pairing beautifully with fruit, wine, and fresh bread.'],
+      ['Cheddar', 'England', 'Cheddar ranges from smooth and mild to powerfully sharp depending on age, offering a rich savory flavor that has made it one of the most widely loved cheeses in the world.'],
+      ['Gouda', 'Netherlands', 'Young Gouda is smooth and mellow while aged Gouda develops caramel sweetness, crunchy texture, and complex toasted flavors that make it ideal for cheese boards.'],
+      ['Mozzarella', 'Italy', 'Fresh mozzarella is prized for its soft texture, delicate milky flavor, and ability to melt beautifully, making it essential in pizza, pasta, and caprese salads.'],
+      ['Gruyère', 'Switzerland', 'Gruyère is famous for its exceptional melting quality and balanced sweet, nutty flavor that shines in fondue, French onion soup, and baked dishes.'],
+      ['Manchego', 'Spain', 'Made from sheep milk, Manchego has a firm texture and buttery, grassy flavor with subtle tanginess that reflects the Spanish countryside where it originated.'],
+      ['Camembert', 'France', 'Camembert offers earthy aromas and a creamy center that becomes wonderfully gooey at peak ripeness, creating a rich and comforting eating experience.'],
+      ['Roquefort', 'France', 'This legendary blue cheese is aged in limestone caves, producing bold salty flavors, creamy texture, and striking blue veins with remarkable depth and complexity.'],
+      ['Feta', 'Greece', 'Feta is a crumbly brined cheese with bright tangy flavor that brings freshness and saltiness to salads, pastries, and Mediterranean cuisine.'],
+      ['Emmental', 'Switzerland', 'Recognized by its large holes, Emmental has a mild sweet flavor and smooth texture that make it a classic addition to sandwiches and melted dishes.'],
+      ['Havarti', 'Denmark', 'Havarti is creamy, buttery, and exceptionally smooth with subtle sweetness, making it easy to pair with fruits, meats, and warm bread.'],
+      ['Pecorino Romano', 'Italy', 'Sharp, salty, and deeply savory, Pecorino Romano is crafted from sheep milk and traditionally grated over pasta dishes for powerful flavor.'],
+      ['Comté', 'France', 'Comté is an alpine cheese aged to develop layers of roasted nuts, browned butter, and fruit-like sweetness, creating one of France’s most elegant cheeses.'],
+      ['Monterey Jack', 'United States', 'Monterey Jack is known for its creamy texture and mild flavor, making it a versatile cheese for melting into sandwiches, tacos, and casseroles.'],
+      ['Asiago', 'Italy', 'Depending on age, Asiago can be smooth and creamy or sharp and crumbly, offering rich savory notes that work beautifully in cooking and snacking alike.'],
+      ['Raclette', 'Switzerland', 'Raclette becomes irresistibly gooey when heated and is traditionally scraped over potatoes, meats, and vegetables for a comforting alpine meal.'],
+      ['Provolone', 'Italy', 'Provolone balances smooth creaminess with gentle sharpness, creating a versatile cheese commonly enjoyed in sandwiches, baked dishes, and charcuterie boards.'],
+      ['Stilton', 'England', 'Stilton is a celebrated English blue cheese with crumbly texture and bold earthy flavor that pairs especially well with nuts, fruit, and dessert wines.'],
+      ['Burrata', 'Italy', 'Burrata combines a delicate mozzarella shell with a luscious creamy interior that spills out when cut open, creating an indulgent fresh cheese experience.'],
+      ['Cotija', 'Mexico', 'Cotija is a salty crumbly cheese often sprinkled over street corn, tacos, and beans to add sharp flavor and satisfying texture.'],
+      ['Paneer', 'India', 'Paneer is a fresh cheese with a mild flavor and firm texture that holds its shape during cooking, making it a staple in many rich Indian curries.'],
+      ['Halloumi', 'Cyprus', 'Halloumi has a uniquely firm texture that allows it to be grilled or fried without melting, developing a delicious golden crust and savory flavor.'],
+      ['Taleggio', 'Italy', 'Despite its pungent aroma, Taleggio is surprisingly mild and creamy with fruity undertones that make it excellent for melting and pairing with bread.'],
+      ['Jarlsberg', 'Norway', 'Jarlsberg combines sweet nuttiness with a smooth texture and mild flavor, offering a Scandinavian take on classic Swiss-style cheese traditions.']
+    ];
+
+    const list = document.getElementById('cheeseList');
+
+    cheeses.forEach((cheese, index) => {
+      const card = document.createElement('div');
+      card.className = 'cheese-card';
+
+      card.innerHTML = `
+        <div class="left">
+          <div class="rank">${index + 1}</div>
+          <div class="info">
+            <h2>${cheese[0]}</h2>
+            <p>${cheese[2]}</p>
+          </div>
+        </div>
+        <div class="origin">${cheese[1]}</div>
+      `;
+
+      list.appendChild(card);
+    });
+  </script>
+</body>
+</html>
